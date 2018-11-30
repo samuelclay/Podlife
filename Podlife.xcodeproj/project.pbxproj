@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF45524B21B1E8CF00899CCB /* Podlife v7 bottom.stl in Resources */ = {isa = PBXBuildFile; fileRef = FF7526AE21AF58FF00D98DD6 /* Podlife v7 bottom.stl */; };
+		FF45524C21B1E8D200899CCB /* Podlife v7 top.stl in Resources */ = {isa = PBXBuildFile; fileRef = FF7526AF21AF58FF00D98DD6 /* Podlife v7 top.stl */; };
+		FF45524E21B1F1EB00899CCB /* Podlife v7 bottom.scn in Resources */ = {isa = PBXBuildFile; fileRef = FF45524D21B1F1EB00899CCB /* Podlife v7 bottom.scn */; };
 		FF75269921AF462700D98DD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF75269821AF462700D98DD6 /* AppDelegate.swift */; };
 		FF75269B21AF462700D98DD6 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FF75269A21AF462700D98DD6 /* art.scnassets */; };
 		FF75269D21AF462700D98DD6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF75269C21AF462700D98DD6 /* ViewController.swift */; };
 		FF7526A021AF462700D98DD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF75269E21AF462700D98DD6 /* Main.storyboard */; };
 		FF7526A221AF462A00D98DD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF7526A121AF462A00D98DD6 /* Assets.xcassets */; };
 		FF7526A521AF462A00D98DD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF7526A321AF462A00D98DD6 /* LaunchScreen.storyboard */; };
+		FF7526AD21AF58CF00D98DD6 /* STLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7526AC21AF58CF00D98DD6 /* STLParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FF45524D21B1F1EB00899CCB /* Podlife v7 bottom.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = "Podlife v7 bottom.scn"; path = "art.scnassets/Podlife v7 bottom.scn"; sourceTree = "<group>"; };
 		FF75269521AF462700D98DD6 /* Podlife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Podlife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF75269821AF462700D98DD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF75269A21AF462700D98DD6 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -24,6 +29,9 @@
 		FF7526A121AF462A00D98DD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF7526A421AF462A00D98DD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF7526A621AF462A00D98DD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF7526AC21AF58CF00D98DD6 /* STLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STLParser.swift; sourceTree = "<group>"; };
+		FF7526AE21AF58FF00D98DD6 /* Podlife v7 bottom.stl */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Podlife v7 bottom.stl"; path = "../../../Podlife v7 bottom.stl"; sourceTree = "<group>"; };
+		FF7526AF21AF58FF00D98DD6 /* Podlife v7 top.stl */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Podlife v7 top.stl"; path = "../../../Podlife v7 top.stl"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,10 +67,14 @@
 				FF75269821AF462700D98DD6 /* AppDelegate.swift */,
 				FF75269A21AF462700D98DD6 /* art.scnassets */,
 				FF75269C21AF462700D98DD6 /* ViewController.swift */,
+				FF7526AC21AF58CF00D98DD6 /* STLParser.swift */,
 				FF75269E21AF462700D98DD6 /* Main.storyboard */,
 				FF7526A121AF462A00D98DD6 /* Assets.xcassets */,
 				FF7526A321AF462A00D98DD6 /* LaunchScreen.storyboard */,
 				FF7526A621AF462A00D98DD6 /* Info.plist */,
+				FF7526AE21AF58FF00D98DD6 /* Podlife v7 bottom.stl */,
+				FF45524D21B1F1EB00899CCB /* Podlife v7 bottom.scn */,
+				FF7526AF21AF58FF00D98DD6 /* Podlife v7 top.stl */,
 			);
 			path = Podlife;
 			sourceTree = "<group>";
@@ -126,9 +138,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF75269B21AF462700D98DD6 /* art.scnassets in Resources */,
+				FF45524B21B1E8CF00899CCB /* Podlife v7 bottom.stl in Resources */,
 				FF7526A521AF462A00D98DD6 /* LaunchScreen.storyboard in Resources */,
 				FF7526A221AF462A00D98DD6 /* Assets.xcassets in Resources */,
+				FF45524C21B1E8D200899CCB /* Podlife v7 top.stl in Resources */,
 				FF7526A021AF462700D98DD6 /* Main.storyboard in Resources */,
+				FF45524E21B1F1EB00899CCB /* Podlife v7 bottom.scn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF75269D21AF462700D98DD6 /* ViewController.swift in Sources */,
+				FF7526AD21AF58CF00D98DD6 /* STLParser.swift in Sources */,
 				FF75269921AF462700D98DD6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

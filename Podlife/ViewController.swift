@@ -13,21 +13,17 @@ import ARKit
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
+    var didInitializeScene: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set the view's delegate
-        sceneView.delegate = self
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTapScreen))
+        self.view.addGestureRecognizer(tapRecognizer)
         
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
         
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+//        sceneView.autoenablesDefaultLighting = false;
         
-        // Set the scene to the view
-        sceneView.scene = scene
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,30 +42,48 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Pause the view's session
         sceneView.session.pause()
     }
+    
+    @objc func didTapScreen(recognizer: UITapGestureRecognizer) {
+        if didInitializeScene {
+            if let camera = sceneView.session.currentFrame?.camera {
+                var translation = matrix_identity_float4x4
+                translation.columns.3.z = -1.0
+                let transform = camera.transform * translation
+                let position = SCNVector3(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
+                sceneController.addSphere(position: position)
+            }
+        }
+    }
 
     // MARK: - ARSCNViewDelegate
     
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-     
-        return node
-    }
-*/
-    
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
+    func drawScene() {
         
-    }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
+        // Set the view's delegate
+        sceneView.delegate = self
         
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
+        // Show statistics such as fps and timing information
+        sceneView.showsStatistics = true
         
+        // Create a new scene
+        let scene = SCNScene(named: “art.scnassets/Productivity Pod.scn”)!
+        
+        // Set the scene to the view
+        sceneView.scene = scene
+        
+        let light = SCNLight()
+        light.type = .omni
+        light.intensity = 2000.0
+        light.color = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.8)
+        
+        
+        let lightNode = SCNNode()
+        lightNode.light = light
+        lightNode.position = SCNVector3(0, 1, 0)
+        scene.rootNode.addChildNode(lightNode)
+        
+        let url = Bundle.main.url(forResource: "Podlife v7 bottom", withExtension: "stl")!
+        let node = try! BinarySTLParser.createNodeFromSTL(at: url, unit: .millimeter)
+        scene.rootNode.addChildNode(node)
     }
 }
