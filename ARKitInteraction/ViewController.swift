@@ -33,6 +33,10 @@ class ViewController: UIViewController {
     /// The view controller that displays the virtual object selection menu.
     var objectsViewController: VirtualObjectSelectionViewController?
     
+    lazy var podSelectionViewController: PodSelectionCollectionViewController = {
+        return childViewControllers.lazy.compactMap({ $0 as? PodSelectionCollectionViewController }).first!
+    }()
+    
     // MARK: - ARKit Configuration Properties
     
     /// A type which manages gesture manipulation of virtual content in the scene.
@@ -76,6 +80,9 @@ class ViewController: UIViewController {
             self.restartExperience()
         }
         
+        podSelectionViewController.virtualObjects = VirtualObject.availableObjects
+//        podSelectionViewController = self
+
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showVirtualObjectSelectionViewController))
         // Set the delegate to ensure this gesture is only used when there are no virtual objects in the scene.
         tapGesture.delegate = self
