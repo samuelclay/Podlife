@@ -56,6 +56,9 @@
                             </scrollView>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="630"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BV1-FR-VrT" id="p2U-i7-dNl"/>
+                                </connections>
                             </arscnView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
