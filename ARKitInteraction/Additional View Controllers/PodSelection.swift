@@ -24,11 +24,17 @@ class PodSelectionCell : UICollectionViewCell {
     }
 }
 
+protocol PodSelectionCollectionViewControllerDelegate: class {
+    func podSelectionCollectionViewController(_ selectionViewController: PodSelectionCollectionViewController,
+                                              didSelectObject: VirtualObject)
+}
+
 class PodSelectionCollectionViewController : UICollectionViewController {
     
     var virtualObjects = [VirtualObject]()
-    var selectedVirtualObjectRow: IndexPath?
-
+    var selectedVirtualObjectRow: Int?
+    weak var delegate: PodSelectionCollectionViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -48,7 +54,7 @@ class PodSelectionCollectionViewController : UICollectionViewController {
         
         cell.modelName = virtualObjects[indexPath.row].modelName
         
-        if selectedVirtualObjectRow == indexPath {
+        if selectedVirtualObjectRow == indexPath.row {
             cell.vibrancyView.alpha = 1.0
         } else {
             cell.vibrancyView.alpha = 0.1
@@ -58,7 +64,8 @@ class PodSelectionCollectionViewController : UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        selectedVirtualObjectRow = indexPath.row
+        delegate?.podSelectionCollectionViewController(self, didSelectObject: virtualObjects[indexPath.row])
     }
     
 }

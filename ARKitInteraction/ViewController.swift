@@ -81,7 +81,7 @@ class ViewController: UIViewController {
         }
         
         podSelectionViewController.virtualObjects = VirtualObject.availableObjects
-//        podSelectionViewController = self
+        podSelectionViewController.delegate = self
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showVirtualObjectSelectionViewController))
         // Set the delegate to ensure this gesture is only used when there are no virtual objects in the scene.
