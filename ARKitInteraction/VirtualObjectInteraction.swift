@@ -103,7 +103,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     @objc
     func updateObjectToCurrentTrackingPosition() {
         guard let object = trackedObject, let position = currentTrackingPosition else { return }
-        translate(object, basedOn: position, infinitePlane: translateAssumingInfinitePlane, allowAnimation: true)
+//        translate(object, basedOn: position, infinitePlane: translateAssumingInfinitePlane, allowAnimation: true)
     }
 
     /// - Tag: didRotate
