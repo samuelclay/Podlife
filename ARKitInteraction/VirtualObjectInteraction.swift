@@ -39,6 +39,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         super.init()
         
         let panGesture = ThresholdPanGesture(target: self, action: #selector(didPan(_:)))
+        panGesture.minimumNumberOfTouches = 2
         panGesture.delegate = self
         
         let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(didRotate(_:)))
@@ -103,7 +104,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     @objc
     func updateObjectToCurrentTrackingPosition() {
         guard let object = trackedObject, let position = currentTrackingPosition else { return }
-//        translate(object, basedOn: position, infinitePlane: translateAssumingInfinitePlane, allowAnimation: true)
+        translate(object, basedOn: position, infinitePlane: translateAssumingInfinitePlane, allowAnimation: true)
     }
 
     /// - Tag: didRotate
@@ -131,8 +132,8 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
             selectedObject = tappedObject
         } else if let object = selectedObject {
             // Teleport the object to whereever the user touched the screen.
-            translate(object, basedOn: touchLocation, infinitePlane: false, allowAnimation: false)
-            sceneView.addOrUpdateAnchor(for: object)
+//            translate(object, basedOn: touchLocation, infinitePlane: false, allowAnimation: true)
+//            sceneView.addOrUpdateAnchor(for: object)
         }
     }
     

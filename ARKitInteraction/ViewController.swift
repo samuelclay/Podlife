@@ -61,6 +61,15 @@ class ViewController: UIViewController {
         return sceneView.session
     }
     
+    var worldMapURL: URL = {
+        do {
+            return try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+                .appendingPathComponent("worldMapURL")
+        } catch {
+            fatalError("Error getting world map URL from document directory.")
+        }
+    }()
+    
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
@@ -96,13 +105,62 @@ class ViewController: UIViewController {
         UIApplication.shared.isIdleTimerDisabled = true
 
         // Start the `ARSession`.
-        resetTracking()
+        self.restoreTracking()
+    }
+    
+    func restoreTracking() {
+        if let worldMapData = retrieveWorldMapData(from: worldMapURL),
+            let worldMap = unarchive(worldMapData: worldMapData) {
+            self.resetTracking(worldMap)
+        } else {
+            self.resetTracking()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         session.pause()
+        
+        self.saveWorldMap()
+    }
+    
+    func saveWorldMap() {
+        session.getCurrentWorldMap { (worldMap, error) in
+            guard let worldMap = worldMap else {
+                print("Error getting current world map.")
+                return
+            }
+            
+            do {
+                try self.archive(worldMap: worldMap)
+                DispatchQueue.main.async {
+                    print("World map is saved.")
+                }
+            } catch {
+                fatalError("Error saving world map: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func archive(worldMap: ARWorldMap) throws {
+        let data = try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
+        try data.write(to: self.worldMapURL, options: [.atomic])
+    }
+    
+    func unarchive(worldMapData data: Data) -> ARWorldMap? {
+        guard let unarchievedObject = try? NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data),
+            let worldMap = unarchievedObject else { return nil }
+        return worldMap
+    }
+    
+    func retrieveWorldMapData(from url: URL) -> Data? {
+        do {
+            return try Data(contentsOf: self.worldMapURL)
+        } catch {
+            print("Error retrieving world map data.")
+            return nil
+        }
     }
 
     // MARK: - Scene content setup
@@ -125,7 +183,7 @@ class ViewController: UIViewController {
     // MARK: - Session management
     
     /// Creates a new AR configuration to run on the `session`.
-    func resetTracking() {
+    func resetTracking(_ worldMap: ARWorldMap? = nil) {
         virtualObjectInteraction.selectedObject = nil
         
         let configuration = ARWorldTrackingConfiguration()
@@ -133,9 +191,19 @@ class ViewController: UIViewController {
         if #available(iOS 12.0, *) {
             configuration.environmentTexturing = .automatic
         }
-        session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+        
+        if let worldMap = worldMap {
+            configuration.initialWorldMap = worldMap
+            print("Found saved world map.")
 
-        statusViewController.scheduleMessage("FIND A SURFACE TO PLACE AN OBJECT", inSeconds: 7.5, messageType: .planeEstimation)
+            session.run(configuration, options: [])
+        } else {
+            session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+
+            statusViewController.scheduleMessage("FIND A SURFACE TO PLACE AN OBJECT", inSeconds: 7.5, messageType: .planeEstimation)
+        }
+        
+
     }
 
     // MARK: - Focus Square
