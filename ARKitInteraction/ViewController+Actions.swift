@@ -54,6 +54,52 @@ extension ViewController: UIGestureRecognizerDelegate {
             self.isRestartAvailable = true
         }
     }
+    
+    func networkDiagram() {
+        if !isNetworkDiagramVisible {
+            if let object = podSelectionViewController.virtualObjects.first(where: { (model) -> Bool in
+                print("\(model.modelName): \(String(describing: model.modelName.range(of: "Network")))")
+                return model.modelName.range(of: "Network") != nil
+            }) {
+                self.scalePod()
+                virtualObjectLoader.loadVirtualObject(object, loadedHandler: { [unowned self] loadedObject in
+                    self.sceneView.prepare([object], completionHandler: { _ in
+                        DispatchQueue.main.async {
+                            self.hideObjectLoadingUI()
+                            self.placeVirtualObject(loadedObject)
+                            loadedObject.isHidden = false
+                            self.isNetworkDiagramVisible = true
+                        }
+                    })
+                })
+            }
+        } else {
+            self.scalePod()
+            if let object = virtualObjectLoader.loadedObjects.first(where: { (model) -> Bool in
+                print("\(model.modelName): \(String(describing: model.modelName.range(of: "Network")))")
+                return model.modelName.range(of: "Network") != nil
+            }) {
+                virtualObjectLoader.removeVirtualObject(object)
+                isNetworkDiagramVisible = false
+            }
+        }
+    }
+    
+    func scalePod() {
+        guard let podObject = virtualObjectLoader.loadedObjects.first(where: { (object) -> Bool in
+            return object.modelName.range(of: "Network") == nil
+        }) else {
+            return
+        }
+
+        SCNTransaction.animationDuration = 3
+
+        if !isNetworkDiagramVisible {
+            podObject.scale = SCNVector3(0.1, 0.1, 0.1)
+        } else {
+            podObject.scale = SCNVector3(1, 1, 1)
+        }
+    }
 }
 
 extension ViewController: UIPopoverPresentationControllerDelegate {

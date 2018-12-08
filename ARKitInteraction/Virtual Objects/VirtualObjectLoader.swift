@@ -52,4 +52,15 @@ class VirtualObjectLoader {
         loadedObjects[index].removeFromParentNode()
         loadedObjects.remove(at: index)
     }
+    
+    func removeVirtualObject(_ object: VirtualObject) {
+        if let loadedObject = loadedObjects.first(where: { (virtualObject) -> Bool in
+            return virtualObject == object
+        }) {
+            loadedObject.removeFromParentNode()
+            loadedObjects.removeAll { (virtualObject) -> Bool in
+                return virtualObject == object
+            }
+        }
+    }
 }

@@ -42,7 +42,7 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
             self.statusViewController.cancelScheduledMessage(for: .planeEstimation)
             self.statusViewController.showMessage("SURFACE DETECTED")
             if self.virtualObjectLoader.loadedObjects.isEmpty {
-//                self.statusViewController.scheduleMessage("TAP + TO PLACE AN OBJECT", inSeconds: 7.5, messageType: .contentPlacement)
+                self.statusViewController.scheduleMessage("TAP + TO PLACE AN OBJECT", inSeconds: 7.5, messageType: .contentPlacement)
             }
         }
         updateQueue.async {
@@ -100,7 +100,7 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
     
     func sessionWasInterrupted(_ session: ARSession) {
         // Hide content before going into the background.
-        virtualObjectLoader.loadedObjects.forEach { $0.isHidden = true }
+//        virtualObjectLoader.loadedObjects.forEach { $0.isHidden = true }
     }
     
     func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {

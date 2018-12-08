@@ -23,7 +23,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
      */
     var selectedObject: VirtualObject?
     
-    var doorOpen: Bool = true
+    var doorOpen: Bool = false
     var doorOriginalPosition: SCNVector3?
     var doorOriginalEuler: SCNVector3?
     
@@ -50,6 +50,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         rotationGesture.delegate = self
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap(_:)))
+        tapGesture.numberOfTouchesRequired = 1
         
         // Add gestures to the `sceneView`.
         sceneView.addGestureRecognizer(panGesture)

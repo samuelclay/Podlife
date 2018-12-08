@@ -57,7 +57,7 @@ class PodSelectionCollectionViewController : UICollectionViewController {
         if selectedVirtualObjectRow == indexPath.row {
             cell.vibrancyView.alpha = 1.0
         } else {
-            cell.vibrancyView.alpha = 0.1
+//            cell.vibrancyView.alpha = 0.1
         }
         
         return cell

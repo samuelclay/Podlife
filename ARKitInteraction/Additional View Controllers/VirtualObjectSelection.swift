@@ -119,9 +119,9 @@ class VirtualObjectSelectionViewController: UITableViewController {
         
         let cellIsEnabled = enabledVirtualObjectRows.contains(indexPath.row)
         if cellIsEnabled {
-            cell.vibrancyView.alpha = 1.0
+//            cell.vibrancyView.alpha = 1.0
         } else {
-            cell.vibrancyView.alpha = 0.1
+//            cell.vibrancyView.alpha = 0.1
         }
 
         return cell

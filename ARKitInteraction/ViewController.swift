@@ -47,6 +47,7 @@ class ViewController: UIViewController {
     
     /// Marks if the AR experience is available for restart.
     var isRestartAvailable = true
+    var isNetworkDiagramVisible = false
     
     /// A serial queue used to coordinate adding or removing nodes from the scene.
     let updateQueue = DispatchQueue(label: "com.example.apple-samplecode.arkitexample.serialSceneKitQueue")
@@ -87,6 +88,9 @@ class ViewController: UIViewController {
         // Hook up status view controller callback(s).
         statusViewController.restartExperienceHandler = { [unowned self] in
             self.restartExperience()
+        }
+        statusViewController.networkDiagramHandler = { [unowned self] in
+            self.networkDiagram()
         }
         
         podSelectionViewController.virtualObjects = VirtualObject.availableObjects
@@ -223,14 +227,14 @@ class ViewController: UIViewController {
                 self.sceneView.scene.rootNode.addChildNode(self.focusSquare)
                 self.focusSquare.state = .detecting(hitTestResult: result, camera: camera)
             }
-            addObjectButton.isHidden = false
+//            addObjectButton.isHidden = false
             statusViewController.cancelScheduledMessage(for: .focusSquare)
         } else {
             updateQueue.async {
                 self.focusSquare.state = .initializing
                 self.sceneView.pointOfView?.addChildNode(self.focusSquare)
             }
-            addObjectButton.isHidden = true
+//            addObjectButton.isHidden = true
         }
     }
     
