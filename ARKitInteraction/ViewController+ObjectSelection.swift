@@ -33,6 +33,21 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         }
     }
     
+    func placeVirtualObject(_ virtualObject: VirtualObject, in parentObject: SCNNode) {
+        guard focusSquare.state != .initializing else {
+            statusViewController.showMessage("CANNOT PLACE OBJECT\nTry moving left or right.")
+            if let controller = objectsViewController {
+                virtualObjectSelectionViewController(controller, didDeselectObject: virtualObject)
+            }
+            return
+        }
+        
+        updateQueue.async {
+            parentObject.addChildNode(virtualObject)
+//            self.sceneView.addOrUpdateAnchor(for: virtualObject)
+        }
+    }
+    
     // MARK: - VirtualObjectSelectionViewControllerDelegate
     
     func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, didSelectObject object: VirtualObject) {

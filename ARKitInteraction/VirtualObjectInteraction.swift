@@ -129,11 +129,11 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     }
     
     var doorTopNode: SCNNode? {
-        return self.sceneView.scene.rootNode.childNode(withName: "doorTop", recursively: true)
+        return self.sceneView.scene.rootNode.childNode(withName: "Shell_doorTop", recursively: true)
     }
     
     var doorBottomNode: SCNNode? {
-        return self.sceneView.scene.rootNode.childNode(withName: "doorBottom", recursively: true)
+        return self.sceneView.scene.rootNode.childNode(withName: "Shell_doorBottom", recursively: true)
     }
     
     @objc
@@ -168,12 +168,14 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
 //        }()
         
         if !doorOpen {
-            let newTopPosition = SCNVector3(0.094, 14.26, -79.048)
-            let newTopEuler = SCNVector3(77.872 * .pi / 180.0, -2.814 * .pi / 180.0, 0.604 * .pi / 180.0)
-            let newBottomPosition = SCNVector3(0, 8.265, -57.221)
-            let newBottomEuler = SCNVector3(53.352 * .pi / 180.0, 0, 0)
+            let newTopPosition = SCNVector3(0, 0, 10)
+            let newTopEuler = SCNVector4(0, 0, 1, Double.pi/2)
+            let newBottomPosition = SCNVector3(15.416, 52.525, 0)
+            let newBottomEuler = SCNVector3(-5.795 * .pi / 180.0, 5.079 * .pi / 180.0, 0)
             doorTopNode?.position = newTopPosition
-            doorTopNode?.eulerAngles = newTopEuler
+            let action = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 3)
+            doorTopNode?.runAction(action)
+//            doorTopNode?.rotation = newTopEuler
             doorBottomNode?.position = newBottomPosition
             doorBottomNode?.eulerAngles = newBottomEuler
         } else {
@@ -182,7 +184,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
             let newBottomPosition = SCNVector3(0, 0, 0)
             let newBottomEuler = SCNVector3(0, 0, 0)
             doorTopNode?.position = newTopPosition
-            doorTopNode?.eulerAngles = newTopEuler
+            doorTopNode?.rotation = SCNVector4(0, 0, 0, 0)
             doorBottomNode?.position = newBottomPosition
             doorBottomNode?.eulerAngles = newBottomEuler
         }

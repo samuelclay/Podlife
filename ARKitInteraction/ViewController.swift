@@ -113,12 +113,12 @@ class ViewController: UIViewController {
     }
     
     func restoreTracking() {
-        if let worldMapData = retrieveWorldMapData(from: worldMapURL),
-            let worldMap = unarchive(worldMapData: worldMapData) {
-            self.resetTracking(worldMap)
-        } else {
+//        if let worldMapData = retrieveWorldMapData(from: worldMapURL),
+//            let worldMap = unarchive(worldMapData: worldMapData) {
+//            self.resetTracking(worldMap)
+//        } else {
             self.resetTracking()
-        }
+//        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

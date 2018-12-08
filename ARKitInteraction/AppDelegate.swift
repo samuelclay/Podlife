@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         if let viewController = self.window?.rootViewController as? ViewController {
             viewController.blurView.isHidden = true
-            viewController.restoreTracking()
+//            viewController.restoreTracking()
         }
     }
 }

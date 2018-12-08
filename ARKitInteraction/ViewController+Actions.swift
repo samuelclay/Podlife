@@ -66,7 +66,16 @@ extension ViewController: UIGestureRecognizerDelegate {
                     self.sceneView.prepare([object], completionHandler: { _ in
                         DispatchQueue.main.async {
                             self.hideObjectLoadingUI()
-                            self.placeVirtualObject(loadedObject)
+                            
+                            if let parentObject = self.virtualObjectLoader.loadedObjects.first(where: { (object) -> Bool in
+                                return object.modelName.range(of: "Network") == nil
+                            })
+//                                let mapBase = parentObject.childNode(withName: "MapBase", recursively: true)
+                            {
+                                self.placeVirtualObject(loadedObject, in: parentObject)
+                            } else {
+                                self.placeVirtualObject(loadedObject)
+                            }
                             loadedObject.isHidden = false
                             self.isNetworkDiagramVisible = true
                         }
@@ -80,8 +89,8 @@ extension ViewController: UIGestureRecognizerDelegate {
                 return model.modelName.range(of: "Network") != nil
             }) {
                 virtualObjectLoader.removeVirtualObject(object)
-                isNetworkDiagramVisible = false
             }
+            isNetworkDiagramVisible = false
         }
     }
     
@@ -91,13 +100,14 @@ extension ViewController: UIGestureRecognizerDelegate {
         }) else {
             return
         }
+        if let podObjectWithoutMap = podObject.childNode(withName: "pod", recursively: true) {
+            SCNTransaction.animationDuration = 3
 
-        SCNTransaction.animationDuration = 3
-
-        if !isNetworkDiagramVisible {
-            podObject.scale = SCNVector3(0.1, 0.1, 0.1)
-        } else {
-            podObject.scale = SCNVector3(1, 1, 1)
+            if !isNetworkDiagramVisible {
+                podObjectWithoutMap.scale = SCNVector3(0.001, 0.001, 0.001)
+            } else {
+                podObjectWithoutMap.scale = SCNVector3(0.01, 0.01, 0.01)
+            }
         }
     }
 }
