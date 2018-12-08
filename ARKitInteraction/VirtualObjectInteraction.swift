@@ -23,6 +23,10 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
      */
     var selectedObject: VirtualObject?
     
+    var doorOpen: Bool = true
+    var doorOriginalPosition: SCNVector3?
+    var doorOriginalEuler: SCNVector3?
+    
     /// The object that is tracked for use by the pan and rotation gestures.
     private var trackedObject: VirtualObject? {
         didSet {
@@ -123,6 +127,14 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         gesture.rotation = 0
     }
     
+    var doorTopNode: SCNNode? {
+        return self.sceneView.scene.rootNode.childNode(withName: "doorTop", recursively: true)
+    }
+    
+    var doorBottomNode: SCNNode? {
+        return self.sceneView.scene.rootNode.childNode(withName: "doorBottom", recursively: true)
+    }
+    
     @objc
     func didTap(_ gesture: UITapGestureRecognizer) {
         let touchLocation = gesture.location(in: sceneView)
@@ -130,11 +142,51 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         if let tappedObject = sceneView.virtualObject(at: touchLocation) {
             // Select a new object.
             selectedObject = tappedObject
-        } else if let object = selectedObject {
+            
+//                if doorObject.isEqual(tappedObject) {
+                self.animateDoor()
+//                }
+            
+//        } else if let object = selectedObject {
             // Teleport the object to whereever the user touched the screen.
 //            translate(object, basedOn: touchLocation, infinitePlane: false, allowAnimation: true)
 //            sceneView.addOrUpdateAnchor(for: object)
         }
+    }
+    
+    func animateDoor() {
+        SCNTransaction.animationDuration = 3
+        
+//        let doorOriginalPosition = self.doorOriginalPosition ?? {
+//            self.doorOriginalPosition = doorTopNode.position
+//            return doorNode.position
+//        }()
+//        let doorOriginalEuler = self.doorOriginalEuler ?? {
+//            self.doorOriginalEuler = doorNode.eulerAngles
+//            return doorNode.eulerAngles
+//        }()
+        
+        if !doorOpen {
+            let newTopPosition = SCNVector3(0.094, 14.26, -79.048)
+            let newTopEuler = SCNVector3(77.872 * .pi / 180.0, -2.814 * .pi / 180.0, 0.604 * .pi / 180.0)
+            let newBottomPosition = SCNVector3(0, 8.265, -57.221)
+            let newBottomEuler = SCNVector3(53.352 * .pi / 180.0, 0, 0)
+            doorTopNode?.position = newTopPosition
+            doorTopNode?.eulerAngles = newTopEuler
+            doorBottomNode?.position = newBottomPosition
+            doorBottomNode?.eulerAngles = newBottomEuler
+        } else {
+            let newTopPosition = SCNVector3(0, 0, 0)
+            let newTopEuler = SCNVector3(0, 0, 0)
+            let newBottomPosition = SCNVector3(0, 0, 0)
+            let newBottomEuler = SCNVector3(0, 0, 0)
+            doorTopNode?.position = newTopPosition
+            doorTopNode?.eulerAngles = newTopEuler
+            doorBottomNode?.position = newBottomPosition
+            doorBottomNode?.eulerAngles = newBottomEuler
+        }
+
+        doorOpen = !doorOpen
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
