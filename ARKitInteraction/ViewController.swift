@@ -93,7 +93,7 @@ class ViewController: UIViewController {
             self.networkDiagram()
         }
         
-        podSelectionViewController.virtualObjects = VirtualObject.availableObjects
+        podSelectionViewController.virtualObjects = VirtualObject.availableObjects.filter { $0.modelName.range(of: "Network") == nil }
         podSelectionViewController.delegate = self
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showVirtualObjectSelectionViewController))

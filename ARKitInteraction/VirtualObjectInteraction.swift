@@ -170,6 +170,8 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         if !doorOpen {
             let newTopPosition = SCNVector3(0, 0, 10)
             let newTopEuler = SCNVector4(0, 0, 1, Double.pi/2)
+            let (minVec, maxVec) = (doorTopNode?.boundingBox)!
+            doorTopNode?.pivot = SCNMatrix4MakeTranslation((maxVec.x - minVec.x) / 2 + minVec.x, (maxVec.y - minVec.y) / 2 + minVec.y, 0)
             let newBottomPosition = SCNVector3(15.416, 52.525, 0)
             let newBottomEuler = SCNVector3(-5.795 * .pi / 180.0, 5.079 * .pi / 180.0, 0)
             doorTopNode?.position = newTopPosition
