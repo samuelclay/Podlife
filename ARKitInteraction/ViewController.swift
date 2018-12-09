@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     // MARK: - ARKit Configuration Properties
     
     /// A type which manages gesture manipulation of virtual content in the scene.
-    lazy var virtualObjectInteraction = VirtualObjectInteraction(sceneView: sceneView)
+    lazy var virtualObjectInteraction = VirtualObjectInteraction(sceneView: sceneView, viewController: self)
     
     /// Coordinates the loading and unloading of reference nodes for virtual objects.
     let virtualObjectLoader = VirtualObjectLoader()
@@ -48,6 +48,7 @@ class ViewController: UIViewController {
     /// Marks if the AR experience is available for restart.
     var isRestartAvailable = true
     var isNetworkDiagramVisible = false
+    var currentNetworkDiagram = 0
     
     /// A serial queue used to coordinate adding or removing nodes from the scene.
     let updateQueue = DispatchQueue(label: "com.example.apple-samplecode.arkitexample.serialSceneKitQueue")
@@ -90,7 +91,7 @@ class ViewController: UIViewController {
             self.restartExperience()
         }
         statusViewController.networkDiagramHandler = { [unowned self] in
-            self.networkDiagram()
+            self.toggleNetworkDiagram()
         }
         
         podSelectionViewController.virtualObjects = VirtualObject.availableObjects.filter { $0.modelName.range(of: "Network") == nil }

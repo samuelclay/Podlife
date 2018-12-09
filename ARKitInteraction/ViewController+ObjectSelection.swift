@@ -51,6 +51,8 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
     // MARK: - VirtualObjectSelectionViewControllerDelegate
     
     func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, didSelectObject object: VirtualObject) {
+        virtualObjectInteraction.resetDoor()
+        
         virtualObjectLoader.loadVirtualObject(object, loadedHandler: { [unowned self] loadedObject in
             self.sceneView.prepare([object], completionHandler: { _ in
                 DispatchQueue.main.async {

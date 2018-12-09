@@ -17,6 +17,8 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     /// The scene view to hit test against when moving virtual content.
     let sceneView: VirtualObjectARView
     
+    let viewController: ViewController
+    
     /**
      The object that has been most recently intereacted with.
      The `selectedObject` can be moved at any time with the tap gesture.
@@ -38,8 +40,9 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     /// The tracked screen position used to update the `trackedObject`'s position in `updateObjectToCurrentTrackingPosition()`.
     private var currentTrackingPosition: CGPoint?
 
-    init(sceneView: VirtualObjectARView) {
+    init(sceneView: VirtualObjectARView, viewController: ViewController) {
         self.sceneView = sceneView
+        self.viewController = viewController
         super.init()
         
         let panGesture = ThresholdPanGesture(target: self, action: #selector(didPan(_:)))
@@ -144,10 +147,11 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
             // Select a new object.
             selectedObject = tappedObject
             
-//                if doorObject.isEqual(tappedObject) {
+            if viewController.isNetworkDiagramVisible {
+                viewController.nextNetworkDiagram()
+            } else {
                 self.animateDoor()
-//                }
-            
+            }
 //        } else if let object = selectedObject {
             // Teleport the object to whereever the user touched the screen.
 //            translate(object, basedOn: touchLocation, infinitePlane: false, allowAnimation: true)
@@ -157,15 +161,6 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     
     func animateDoor() {
         SCNTransaction.begin()
-        
-//        let doorOriginalPosition = self.doorOriginalPosition ?? {
-//            self.doorOriginalPosition = doorTopNode.position
-//            return doorNode.position
-//        }()
-//        let doorOriginalEuler = self.doorOriginalEuler ?? {
-//            self.doorOriginalEuler = doorNode.eulerAngles
-//            return doorNode.eulerAngles
-//        }()
         
         if !doorOpen {
             SCNTransaction.animationDuration = 1
@@ -192,6 +187,12 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         }
         
         SCNTransaction.commit()
+    }
+    
+    func resetDoor() {
+        self.doorTopNode?.position = SCNVector3(0, 0, 0)
+        self.doorBottomNode?.position = SCNVector3(0, 0, 0)
+        self.doorOpen = false
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
