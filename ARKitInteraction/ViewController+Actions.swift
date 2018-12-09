@@ -115,8 +115,12 @@ extension ViewController: UIGestureRecognizerDelegate {
             SCNTransaction.animationDuration = 3
 
             if !isNetworkDiagramVisible {
+                podObject.rotation = SCNVector4(0, 1, 0, Double.pi/2)
+//                podObject.position = SCNVector3(0, 0, 0)
                 podObjectWithoutMap.scale = SCNVector3(0.001, 0.001, 0.001)
             } else {
+                podObject.rotation = SCNVector4(0, 0, 0, Double.pi/2)
+//                podObject.position = SCNVector3(0, 0, 0)
                 podObjectWithoutMap.scale = SCNVector3(0.01, 0.01, 0.01)
             }
         }

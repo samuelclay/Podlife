@@ -156,7 +156,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     }
     
     func animateDoor() {
-        SCNTransaction.animationDuration = 3
+        SCNTransaction.begin()
         
 //        let doorOriginalPosition = self.doorOriginalPosition ?? {
 //            self.doorOriginalPosition = doorTopNode.position
@@ -168,30 +168,30 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
 //        }()
         
         if !doorOpen {
-            let newTopPosition = SCNVector3(0, 0, 10)
-            let newTopEuler = SCNVector4(0, 0, 1, Double.pi/2)
-            let (minVec, maxVec) = (doorTopNode?.boundingBox)!
-            doorTopNode?.pivot = SCNMatrix4MakeTranslation((maxVec.x - minVec.x) / 2 + minVec.x, (maxVec.y - minVec.y) / 2 + minVec.y, 0)
-            let newBottomPosition = SCNVector3(15.416, 52.525, 0)
-            let newBottomEuler = SCNVector3(-5.795 * .pi / 180.0, 5.079 * .pi / 180.0, 0)
-            doorTopNode?.position = newTopPosition
-            let action = SCNAction.rotate(by: .pi, around: SCNVector3(0, 1, 0), duration: 3)
-            doorTopNode?.runAction(action)
-//            doorTopNode?.rotation = newTopEuler
-            doorBottomNode?.position = newBottomPosition
-            doorBottomNode?.eulerAngles = newBottomEuler
+            SCNTransaction.animationDuration = 1
+            doorTopNode?.position = SCNVector3(3, 0, 0)
+            doorBottomNode?.position = SCNVector3(3, 0, 0)
         } else {
-            let newTopPosition = SCNVector3(0, 0, 0)
-            let newTopEuler = SCNVector3(0, 0, 0)
-            let newBottomPosition = SCNVector3(0, 0, 0)
-            let newBottomEuler = SCNVector3(0, 0, 0)
-            doorTopNode?.position = newTopPosition
-            doorTopNode?.rotation = SCNVector4(0, 0, 0, 0)
-            doorBottomNode?.position = newBottomPosition
-            doorBottomNode?.eulerAngles = newBottomEuler
+            SCNTransaction.animationDuration = 2
+            doorTopNode?.position = SCNVector3(3, 0, 0)
+            doorBottomNode?.position = SCNVector3(3, 0, 0)
         }
-
-        doorOpen = !doorOpen
+        
+        SCNTransaction.completionBlock = {
+            if !self.doorOpen {
+                SCNTransaction.animationDuration = 2
+                self.doorTopNode?.position = SCNVector3(3, 0, 64)
+                self.doorBottomNode?.position = SCNVector3(3, 0, 64)
+            } else {
+                SCNTransaction.animationDuration = 1
+                self.doorTopNode?.position = SCNVector3(0, 0, 0)
+                self.doorBottomNode?.position = SCNVector3(0, 0, 0)
+            }
+            
+            self.doorOpen = !self.doorOpen
+        }
+        
+        SCNTransaction.commit()
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
