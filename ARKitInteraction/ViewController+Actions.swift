@@ -64,7 +64,7 @@ extension ViewController: UIGestureRecognizerDelegate {
         if isNetworkDiagramVisible {
             self.drawNetworkDiagram()
         } else {
-            self.scalePod()
+            self.scalePod(animate: true)
             self.removeNetworkDiagram()
             self.podSelectionViewController.view.alpha = 1
         }
@@ -73,9 +73,9 @@ extension ViewController: UIGestureRecognizerDelegate {
     func drawNetworkDiagram() {
         if let object = VirtualObject.availableObjects.first(where: { (model) -> Bool in
             print("\(model.modelName): \(String(describing: model.modelName.range(of: "Network")))")
-            return model.modelName.range(of: "NetworkDiagramRoute\(self.currentNetworkDiagram+1)") != nil
+            return model.modelName.range(of: "NetworkRoute\(self.currentNetworkDiagram+1)") != nil
         }) {
-            self.scalePod()
+            self.scalePod(animate: true)
             virtualObjectLoader.loadVirtualObject(object, loadedHandler: { [unowned self] loadedObject in
                 self.sceneView.prepare([object], completionHandler: { _ in
                     DispatchQueue.main.async {
@@ -87,6 +87,7 @@ extension ViewController: UIGestureRecognizerDelegate {
                             //                                let mapBase = parentObject.childNode(withName: "MapBase", recursively: true)
                         {
                             loadedObject.opacity = 0
+                            loadedObject.scale = SCNVector3(0.01, 0.01, 0.01)
                             self.placeVirtualObject(loadedObject, in: parentObject)
                             SCNTransaction.animationDuration = 3
                             loadedObject.opacity = 1
@@ -110,14 +111,16 @@ extension ViewController: UIGestureRecognizerDelegate {
         }
     }
     
-    func scalePod() {
+    func scalePod(animate: Bool = true) {
         guard let podObject = virtualObjectLoader.loadedObjects.first(where: { (object) -> Bool in
             return object.modelName.range(of: "Network") == nil
         }) else {
             return
         }
         if let podObjectWithoutMap = podObject.childNode(withName: "pod", recursively: true) {
-            SCNTransaction.animationDuration = 3
+            if animate {
+                SCNTransaction.animationDuration = 3
+            }
 
             if isNetworkDiagramVisible {
                 podObject.rotation = SCNVector4(0, 1, 0, Double.pi/2)
@@ -126,7 +129,7 @@ extension ViewController: UIGestureRecognizerDelegate {
             } else {
                 podObject.rotation = SCNVector4(0, 0, 0, Double.pi/2)
 //                podObject.position = SCNVector3(0, 0, 0)
-                podObjectWithoutMap.scale = SCNVector3(0.01, 0.01, 0.01)
+                podObjectWithoutMap.scale = SCNVector3(0.0175, 0.0175, 0.0175)
             }
         }
     }
@@ -139,10 +142,9 @@ extension ViewController: UIGestureRecognizerDelegate {
     }
     
     func resetNetworkDiagram() {
-        isNetworkDiagramVisible = true
-        self.scalePod()
-        self.removeNetworkDiagram()
         isNetworkDiagramVisible = false
+        self.scalePod(animate: false)
+        self.removeNetworkDiagram()
         self.podSelectionViewController.view.alpha = 1
     }
 

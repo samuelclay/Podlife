@@ -27,6 +27,7 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         virtualObjectInteraction.translate(virtualObject, basedOn: screenCenter, infinitePlane: false, allowAnimation: false)
         virtualObjectInteraction.selectedObject = virtualObject
         
+        self.scalePod()
         updateQueue.async {
             self.sceneView.scene.rootNode.addChildNode(virtualObject)
             self.sceneView.addOrUpdateAnchor(for: virtualObject)
