@@ -43,9 +43,9 @@
 		FF150B1E21B5D36F00DE375C /* Icon-Small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF150B0F21B5D36E00DE375C /* Icon-Small@3x.png */; };
 		FF150B1F21B5D36F00DE375C /* Icon-Small-40.png in Resources */ = {isa = PBXBuildFile; fileRef = FF150B1021B5D36E00DE375C /* Icon-Small-40.png */; };
 		FF150B2021B5D36F00DE375C /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF150B1121B5D36E00DE375C /* Icon-Small@2x.png */; };
-		FFCCCC4921BC8BA6002C9ADE /* FitnessV13.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCCCC4621BC8BA6002C9ADE /* FitnessV13.png */; };
-		FFCCCC4A21BC8BA6002C9ADE /* MeditationV13.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCCCC4721BC8BA6002C9ADE /* MeditationV13.png */; };
-		FFCCCC4B21BC8BA6002C9ADE /* ProductivityV13.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCCCC4821BC8BA6002C9ADE /* ProductivityV13.png */; };
+		FFCA019821BE0A3E00B28315 /* Fitness.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCA019521BE0A3D00B28315 /* Fitness.png */; };
+		FFCA019921BE0A3E00B28315 /* Productivity.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCA019621BE0A3D00B28315 /* Productivity.png */; };
+		FFCA019A21BE0A3E00B28315 /* Meditation.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCA019721BE0A3E00B28315 /* Meditation.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,9 +90,9 @@
 		FF150B0F21B5D36E00DE375C /* Icon-Small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@3x.png"; sourceTree = "<group>"; };
 		FF150B1021B5D36E00DE375C /* Icon-Small-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-40.png"; sourceTree = "<group>"; };
 		FF150B1121B5D36E00DE375C /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
-		FFCCCC4621BC8BA6002C9ADE /* FitnessV13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FitnessV13.png; sourceTree = "<group>"; };
-		FFCCCC4721BC8BA6002C9ADE /* MeditationV13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MeditationV13.png; sourceTree = "<group>"; };
-		FFCCCC4821BC8BA6002C9ADE /* ProductivityV13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProductivityV13.png; sourceTree = "<group>"; };
+		FFCA019521BE0A3D00B28315 /* Fitness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fitness.png; sourceTree = "<group>"; };
+		FFCA019621BE0A3D00B28315 /* Productivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Productivity.png; sourceTree = "<group>"; };
+		FFCA019721BE0A3E00B28315 /* Meditation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Meditation.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,9 +214,9 @@
 		FF150ADE21B5D0AE00DE375C /* Media */ = {
 			isa = PBXGroup;
 			children = (
-				FFCCCC4621BC8BA6002C9ADE /* FitnessV13.png */,
-				FFCCCC4721BC8BA6002C9ADE /* MeditationV13.png */,
-				FFCCCC4821BC8BA6002C9ADE /* ProductivityV13.png */,
+				FFCA019521BE0A3D00B28315 /* Fitness.png */,
+				FFCA019721BE0A3E00B28315 /* Meditation.png */,
+				FFCA019621BE0A3D00B28315 /* Productivity.png */,
 				FF150B0121B5D36E00DE375C /* icons */,
 			);
 			path = Media;
@@ -313,6 +313,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFCA019821BE0A3E00B28315 /* Fitness.png in Resources */,
 				FF150B1A21B5D36F00DE375C /* Icon-Notification@3x.png in Resources */,
 				FF150B1521B5D36F00DE375C /* Icon-60@3x.png in Resources */,
 				FF150B2021B5D36F00DE375C /* Icon-Small@2x.png in Resources */,
@@ -324,16 +325,15 @@
 				FF150B1821B5D36F00DE375C /* Icon-Small-40@2x.png in Resources */,
 				FF150B1221B5D36F00DE375C /* Icon-76@2x.png in Resources */,
 				FF150B1E21B5D36F00DE375C /* Icon-Small@3x.png in Resources */,
-				FFCCCC4A21BC8BA6002C9ADE /* MeditationV13.png in Resources */,
 				FF150B1721B5D36F00DE375C /* Icon-Notification@2x.png in Resources */,
 				3929C4911E89EC2C00E00B60 /* Main.storyboard in Resources */,
 				FF150B1F21B5D36F00DE375C /* Icon-Small-40.png in Resources */,
 				FF150B1B21B5D36F00DE375C /* iTunesArtwork@1x.png in Resources */,
-				FFCCCC4921BC8BA6002C9ADE /* FitnessV13.png in Resources */,
-				FFCCCC4B21BC8BA6002C9ADE /* ProductivityV13.png in Resources */,
 				FF150B1C21B5D36F00DE375C /* Icon-60@2x.png in Resources */,
+				FFCA019A21BE0A3E00B28315 /* Meditation.png in Resources */,
 				FF150B1321B5D36F00DE375C /* Icon-83.5@2x.png in Resources */,
 				FF150B1921B5D36F00DE375C /* Icon-Small-40@3x.png in Resources */,
+				FFCA019921BE0A3E00B28315 /* Productivity.png in Resources */,
 				FF150B1621B5D36F00DE375C /* Icon-76.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

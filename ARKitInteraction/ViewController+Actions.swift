@@ -60,6 +60,8 @@ extension ViewController: UIGestureRecognizerDelegate {
     
     func toggleNetworkDiagram() {
         isNetworkDiagramVisible = !isNetworkDiagramVisible
+        self.virtualObjectInteraction.doorOpen = false
+        self.virtualObjectInteraction.resetDoor()
         
         if isNetworkDiagramVisible {
             self.drawNetworkDiagram()
