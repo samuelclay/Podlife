@@ -39,7 +39,7 @@ class StatusViewController: UIViewController {
     
     @IBOutlet weak private var restartExperienceButton: UIButton!
     
-    @IBOutlet weak private var networkDiagramButton: UIButton!
+    @IBOutlet weak var networkDiagramButton: UIButton!
 
     // MARK: - Properties
     

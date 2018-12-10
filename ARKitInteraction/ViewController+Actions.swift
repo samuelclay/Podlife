@@ -64,8 +64,10 @@ extension ViewController: UIGestureRecognizerDelegate {
         self.virtualObjectInteraction.resetDoor()
         
         if isNetworkDiagramVisible {
+            statusViewController.networkDiagramButton.setTitle("Choose Pod", for: .normal)
             self.drawNetworkDiagram()
         } else {
+            statusViewController.networkDiagramButton.setTitle("Choose Route", for: .normal)
             self.scalePod(animate: true)
             self.removeNetworkDiagram()
             self.podSelectionViewController.view.alpha = 1

@@ -46,6 +46,7 @@
 		FFCA019821BE0A3E00B28315 /* Fitness.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCA019521BE0A3D00B28315 /* Fitness.png */; };
 		FFCA019921BE0A3E00B28315 /* Productivity.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCA019621BE0A3D00B28315 /* Productivity.png */; };
 		FFCA019A21BE0A3E00B28315 /* Meditation.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCA019721BE0A3E00B28315 /* Meditation.png */; };
+		FFCA019C21BE139100B28315 /* icons8-track-order-64.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCA019B21BE139100B28315 /* icons8-track-order-64.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		FFCA019521BE0A3D00B28315 /* Fitness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fitness.png; sourceTree = "<group>"; };
 		FFCA019621BE0A3D00B28315 /* Productivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Productivity.png; sourceTree = "<group>"; };
 		FFCA019721BE0A3E00B28315 /* Meditation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Meditation.png; sourceTree = "<group>"; };
+		FFCA019B21BE139100B28315 /* icons8-track-order-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons8-track-order-64.png"; path = "../../../../../../../../Downloads/icons8-track-order-64.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +216,7 @@
 		FF150ADE21B5D0AE00DE375C /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				FFCA019B21BE139100B28315 /* icons8-track-order-64.png */,
 				FFCA019521BE0A3D00B28315 /* Fitness.png */,
 				FFCA019721BE0A3E00B28315 /* Meditation.png */,
 				FFCA019621BE0A3D00B28315 /* Productivity.png */,
@@ -325,6 +328,7 @@
 				FF150B1821B5D36F00DE375C /* Icon-Small-40@2x.png in Resources */,
 				FF150B1221B5D36F00DE375C /* Icon-76@2x.png in Resources */,
 				FF150B1E21B5D36F00DE375C /* Icon-Small@3x.png in Resources */,
+				FFCA019C21BE139100B28315 /* icons8-track-order-64.png in Resources */,
 				FF150B1721B5D36F00DE375C /* Icon-Notification@2x.png in Resources */,
 				3929C4911E89EC2C00E00B60 /* Main.storyboard in Resources */,
 				FF150B1F21B5D36F00DE375C /* Icon-Small-40.png in Resources */,
